@@ -2,49 +2,59 @@ import React, {useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
 import {Input} from "./components/Input";
+import {FullSet} from "./components/FullSet";
 
+type CounterType = {
+    counter: number
+    startValue: number
+    maxValue: number
+}
 
 function App() {
-    const [counter, setCounter] = useState<number>(0)
-
+    // let startValue = 0
+    // let maxValue = 1
     let maxCounterStyle: boolean = false
     let resetButtonStyle: boolean = true
-    if (counter === 5) {
+
+    const [counter, setCounter] = useState<CounterType>(
+        { counter: 0,
+                    startValue: 0,
+                    maxValue: 1,
+        }
+    )
+    const setRange = (sValue: number, mValue: number) => {
+        let obj = {
+            counter: sValue,
+            startValue: sValue,
+            maxValue: mValue,
+        }
+        setCounter(obj)
+    }
+
+    if (counter.counter === counter.maxValue) {
         maxCounterStyle = true
     }
-    if (counter !== 0) {
+    if (counter.counter !== counter.startValue) {
         resetButtonStyle = false
     }
 
-    const [maxValue, setMaxValue] = useState(0)
-    const [startValue, setStartValue] = useState(0)
     const incrementCount = () => {
-        setCounter(counter + 1)
+        counter.counter += 1
+        setCounter({...counter})
+
     }
     const counterReset = () => {
-        setCounter(0)
+        counter.counter = counter.startValue
+        setCounter({...counter})
     }
+
     return (
         <div className="App">
-            <div className={'wrapper'}>
-                <div className='counter-wrapper'>
-                    <div className={'flex-wrapper'}>
-                        <span className={'message'}>max value</span>
-                        <Input value={maxValue} type={'number'} setValue={setMaxValue}/>
-                    </div>
-                    <div className={'flex-wrapper'}>
-                        <span  className={'message'}>start value</span>
-                        <Input value={startValue} type={'number'} setValue={setStartValue}/>
-                    </div>
-                </div>
-                <div className="button-wrapper">
-                    <Button title={'set'} onclick={incrementCount} className={'button'} disabled={maxCounterStyle}/>
+            <FullSet setRange={setRange}/>
 
-                </div>
-            </div>
             <div className={'wrapper'}>
                 <div className='counter-wrapper'>
-                    <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counter}</span>
+                    <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counter.counter}</span>
                 </div>
                 <div className="button-wrapper">
                     <Button title={'inc'} onclick={incrementCount} className={'button'} disabled={maxCounterStyle}/>
