@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
-
+import {Input} from "./components/Input";
 
 
 function App() {
@@ -16,6 +16,8 @@ function App() {
         resetButtonStyle = false
     }
 
+    const [maxValue, setMaxValue] = useState(0)
+    const [startValue, setStartValue] = useState(0)
     const incrementCount = () => {
         setCounter(counter + 1)
     }
@@ -24,6 +26,22 @@ function App() {
     }
     return (
         <div className="App">
+            <div className={'wrapper'}>
+                <div className='counter-wrapper'>
+                    <div className={'flex-wrapper'}>
+                        <span className={'message'}>max value</span>
+                        <Input value={maxValue} type={'number'} setValue={setMaxValue}/>
+                    </div>
+                    <div className={'flex-wrapper'}>
+                        <span  className={'message'}>start value</span>
+                        <Input value={startValue} type={'number'} setValue={setStartValue}/>
+                    </div>
+                </div>
+                <div className="button-wrapper">
+                    <Button title={'set'} onclick={incrementCount} className={'button'} disabled={maxCounterStyle}/>
+
+                </div>
+            </div>
             <div className={'wrapper'}>
                 <div className='counter-wrapper'>
                     <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counter}</span>

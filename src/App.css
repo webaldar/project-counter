@@ -12,23 +12,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
     border: 3px solid skyblue;
     padding: 9px;
     border-radius: 10px;
-
-
     background-color: #414148;
+    margin-left: 40px;
 }
-
+.flex-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+}
 .counter-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 200px;
+    width: 250px;
+    height: 100px;
     background-color: #414148;
     border: 3px solid skyblue;
     border-radius: 9px;
     margin-bottom: 20px;
+
 }
 
 .counter-style {
@@ -39,11 +45,20 @@
     color: skyblue;
 
 }
-
+.message {
+    color: skyblue;
+    font-size: 25px;
+}
+input {
+    width: 70px;
+    height: 20px;
+    text-align: center;
+}
 .button-wrapper {
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
-    width: 188px;
+    justify-content: center;
+    width: 250px;
     background-color: #414148;
     border: 3px solid skyblue;
     border-radius: 9px;
@@ -52,6 +67,8 @@
 
 .button {
     width: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
     padding: 5px;
     border: 2px solid skyblue;
     border-radius: 5px;
