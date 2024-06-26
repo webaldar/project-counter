@@ -1,4 +1,5 @@
 import {ChangeEvent} from "react";
+import {changeAndErrorType} from "../App";
 
 
 type InputProps = {
@@ -6,11 +7,13 @@ type InputProps = {
     setValue: (value: number) => void
     type: string
     setButtonDisabled: (status: boolean) => void
+    setChangeAndError: (param: changeAndErrorType) => void
 };
 
-export const Input = ({value, setValue, type, setButtonDisabled}: InputProps) => {
+export const Input = ({value, setValue, type, setButtonDisabled, setChangeAndError }: InputProps) => {
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setButtonDisabled(false)
+        setChangeAndError('change')
         const valueForString = event.currentTarget.value
         setValue(JSON.parse(valueForString))
     }

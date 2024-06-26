@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
-import {Input} from "./components/Input";
 import {FullSet} from "./components/FullSet";
 
 type CounterType = {
@@ -9,10 +8,9 @@ type CounterType = {
     startValue: number
     maxValue: number
 }
+export type changeAndErrorType =  'change' | 'error' | ''
 
 function App() {
-    // let startValue = 0
-    // let maxValue = 1
     let maxCounterStyle: boolean = false
     let resetButtonStyle: boolean = true
 
@@ -22,6 +20,7 @@ function App() {
                     maxValue: 1,
         }
     )
+    const [changeAndError, setChangeAndError] = useState<changeAndErrorType>('')
     const setRange = (sValue: number, mValue: number) => {
         let obj = {
             counter: sValue,
@@ -48,13 +47,18 @@ function App() {
         setCounter({...counter})
     }
 
+
     return (
         <div className="App">
-            <FullSet setRange={setRange}/>
+            <FullSet setRange={setRange} setChangeAndError={setChangeAndError}/>
 
             <div className={'wrapper'}>
                 <div className='counter-wrapper'>
-                    <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counter.counter}</span>
+                    { changeAndError == '' && <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counter.counter}</span>}
+                    { changeAndError == 'change' && <span className={'message-style'}>Enter values and press 'Set'</span>}
+                    { changeAndError == 'error' && <span className={'message-error-style'}>Incorrect value!!!</span>}
+
+                    {/*<span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counter.counter}</span>*/}
                 </div>
                 <div className="button-wrapper">
                     <Button title={'inc'} onclick={incrementCount} className={'button'} disabled={maxCounterStyle}/>
