@@ -11,15 +11,20 @@ let buttonDisabled = true
 export const FullSet = ({setRange, setChangeAndError}: FullSetProps) => {
     const [maxValue, setMaxValue] = useState(0)
     const [startValue, setStartValue] = useState(0)
+    let setButtonDisabled = (status: boolean) => {
+        buttonDisabled = status
+    }
 
+    if(startValue < 0 || maxValue <= 0 ||startValue >= maxValue ){
+        setChangeAndError('error')
+        setButtonDisabled(true)
+    }
     const onclickHandler = () => {
         setButtonDisabled(true)
         setChangeAndError('')
         setRange(startValue, maxValue)
     }
-    let setButtonDisabled = (status: boolean) => {
-        buttonDisabled = status
-    }
+
     // if(buttonDisabled){
     //     setChangeAndError('change')
     // } else {
