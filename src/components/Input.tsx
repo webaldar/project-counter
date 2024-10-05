@@ -1,11 +1,12 @@
 import {ChangeEvent} from "react";
 import {changeAndErrorType} from "./Counter";
+import {counterSettingValueType} from "./SettingBlock";
 
 
 
 type InputProps = {
     value: number
-    setValue: (value: number) => void
+    setValue: (value: counterSettingValueType) => void
     type: string
     setButtonDisabled: (status: boolean) => void
     setChangeAndError: (param: changeAndErrorType) => void

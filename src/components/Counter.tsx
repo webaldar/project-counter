@@ -11,8 +11,6 @@ export type counterValueType = {
 }
 
 function Counter() {
-    let maxCounterStyle: boolean = false
-    let resetButtonStyle: boolean = true
 
     const [counterValue, setCounterValue] = useState<counterValueType>(
         {
@@ -22,28 +20,23 @@ function Counter() {
         }
     )
     const [changeAndError, setChangeAndError] = useState<changeAndErrorType>('')
+
+
     const setRange = (sValue: number, mValue: number) => {
-        let obj = {
+        let newCounterValue = {
             counter: sValue,
             startValue: sValue,
             maxValue: mValue,
         }
-        setCounterValue(obj)
+        setCounterValue(newCounterValue)
     }
 
-    if (counterValue.counter === counterValue.maxValue) {
-        maxCounterStyle = true
-    }
-    if (counterValue.counter !== counterValue.startValue) {
-        resetButtonStyle = false
-    }
-
-    const incrementCount = () => {
+    const incrementCounter = () => {
         counterValue.counter += 1
         setCounterValue({...counterValue})
 
     }
-    const counterReset = () => {
+    const resetCounter = () => {
         counterValue.counter = counterValue.startValue
         setCounterValue({...counterValue})
     }
@@ -52,12 +45,9 @@ function Counter() {
         <>
             <SettingBlock setRange={setRange} setChangeAndError={setChangeAndError}/>
             <DisplayAndControlBlock changeAndError={changeAndError}
-                                    setChangeAndError={setChangeAndError}
-                                    maxCounterStyle={maxCounterStyle}
                                     counterValue={counterValue}
-                                    incrementCount={incrementCount}
-                                    counterReset={counterReset}
-                                    resetButtonStyle={resetButtonStyle}
+                                    incrementCount={incrementCounter}
+                                    counterReset={resetCounter}
             />
         </>
     );
