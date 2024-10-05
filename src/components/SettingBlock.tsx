@@ -1,14 +1,15 @@
 import {useState} from "react";
 import {Input} from "./Input";
 import {Button} from "./Button";
-import {changeAndErrorType} from "../App";
+import {changeAndErrorType} from "./Counter";
+
 
 type FullSetProps = {
     setRange: (startValue: number, maxValue: number) => void
     setChangeAndError: (param: changeAndErrorType) => void
 };
 let buttonDisabled = true
-export const FullSet = ({setRange, setChangeAndError}: FullSetProps) => {
+export const SettingBlock = ({setRange, setChangeAndError}: FullSetProps) => {
     const [maxValue, setMaxValue] = useState(0)
     const [startValue, setStartValue] = useState(0)
     let setButtonDisabled = (status: boolean) => {
@@ -24,12 +25,6 @@ export const FullSet = ({setRange, setChangeAndError}: FullSetProps) => {
         setChangeAndError('')
         setRange(startValue, maxValue)
     }
-
-    // if(buttonDisabled){
-    //     setChangeAndError('change')
-    // } else {
-    //     setChangeAndError('')
-    // }
 
     return (
         <div className={'wrapper'}>

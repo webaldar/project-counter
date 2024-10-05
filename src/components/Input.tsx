@@ -1,5 +1,6 @@
 import {ChangeEvent} from "react";
-import {changeAndErrorType} from "../App";
+import {changeAndErrorType} from "./Counter";
+
 
 
 type InputProps = {
