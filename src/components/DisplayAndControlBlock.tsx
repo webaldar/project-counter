@@ -9,7 +9,6 @@ type DisplayAndControlBlockProps = {
     incrementCount: () => void
     counterReset: () => void
 };
-debugger
 export const DisplayAndControlBlock = ({
                                            changeAndError,
                                            counterValue,
@@ -25,6 +24,10 @@ export const DisplayAndControlBlock = ({
     }
     if (counterValue.counter !== counterValue.startValue) {
         resetButtonStyle = false
+    }
+    if (changeAndError == 'change' || changeAndError == 'error') {
+        maxCounterStyle = true
+        resetButtonStyle = true
     }
 
     return (

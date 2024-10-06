@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Input} from "./Input";
 import {Button} from "./Button";
-import {changeAndErrorType} from "./Counter";
+import {changeAndErrorType, counterValueType} from "./Counter";
 
 export type counterSettingValueType = {
     maxValue: number
@@ -11,15 +11,13 @@ export type counterSettingValueType = {
 type SettingBlockProps = {
     setRange: (startValue: number, maxValue: number) => void
     setChangeAndError: (param: changeAndErrorType) => void
+    counterValue: counterValueType
 };
 let buttonDisabled = true
-export const SettingBlock = ({setRange, setChangeAndError}: SettingBlockProps) => {
-    // const [counterSettingValue, setCounterSettingValue] = useState<counterSettingValueType>({
-    //     maxValue: 1,
-    //     startValue: 0,
-    // })
-    const [maxValue, setMaxValue] = useState(1)
-    const [startValue, setStartValue] = useState(0)
+export const SettingBlock = ({setRange, setChangeAndError, counterValue}: SettingBlockProps) => {
+
+    const [maxValue, setMaxValue] = useState(counterValue.maxValue)
+    const [startValue, setStartValue] = useState(counterValue.startValue)
     let setButtonDisabled = (status: boolean) => {
         buttonDisabled = status
     }
