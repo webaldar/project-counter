@@ -9,6 +9,7 @@ type DisplayAndControlBlockProps = {
     incrementCount: () => void
     counterReset: () => void
 };
+debugger
 export const DisplayAndControlBlock = ({
                                            changeAndError,
                                            counterValue,

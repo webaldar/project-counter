@@ -14,25 +14,24 @@ type SettingBlockProps = {
 };
 let buttonDisabled = true
 export const SettingBlock = ({setRange, setChangeAndError}: SettingBlockProps) => {
-    const [counterSettingValue, setCounterSettingValue] = useState<counterSettingValueType>({
-        maxValue: 1,
-        startValue: 0,
-    })
-    // const [maxValue, setMaxValue] = useState(1)
-    // const [startValue, setStartValue] = useState(0)
+    // const [counterSettingValue, setCounterSettingValue] = useState<counterSettingValueType>({
+    //     maxValue: 1,
+    //     startValue: 0,
+    // })
+    const [maxValue, setMaxValue] = useState(1)
+    const [startValue, setStartValue] = useState(0)
     let setButtonDisabled = (status: boolean) => {
         buttonDisabled = status
     }
 
-    if(counterSettingValue.startValue < 0 || counterSettingValue.maxValue <= 0 || counterSettingValue.startValue >= counterSettingValue.maxValue ){
+    if(startValue < 0 || maxValue <= 0 || startValue >= maxValue ){
         setChangeAndError('error')
         setButtonDisabled(true)
     }
     const onclickSetButtonHandler = () => {
         setButtonDisabled(true)
         setChangeAndError('')
-        // setRange(startValue, maxValue)
-        setRange(counterSettingValue.startValue, counterSettingValue.maxValue)
+        setRange(startValue, maxValue)
     }
 
     return (
@@ -40,12 +39,12 @@ export const SettingBlock = ({setRange, setChangeAndError}: SettingBlockProps) =
             <div className='counter-wrapper'>
                 <div className={'flex-wrapper'}>
                     <span className={'message'}>max value</span>
-                    <Input  value={counterSettingValue.maxValue} type={'number'} setValue={setCounterSettingValue}
+                    <Input  value={maxValue} type={'number'} setValue={setMaxValue}
                             setButtonDisabled={setButtonDisabled} setChangeAndError={setChangeAndError} />
                 </div>
                 <div className={'flex-wrapper'}>
                     <span className={'message'}>start value</span>
-                    <Input value={counterSettingValue.startValue} type={'number'} setValue={setCounterSettingValue}
+                    <Input value={startValue} type={'number'} setValue={setStartValue}
                            setButtonDisabled={setButtonDisabled} setChangeAndError={setChangeAndError}/>
                 </div>
             </div>

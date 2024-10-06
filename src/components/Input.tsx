@@ -6,7 +6,7 @@ import {counterSettingValueType} from "./SettingBlock";
 
 type InputProps = {
     value: number
-    setValue: (value: counterSettingValueType) => void
+    setValue: (value: number) => void
     type: string
     setButtonDisabled: (status: boolean) => void
     setChangeAndError: (param: changeAndErrorType) => void
