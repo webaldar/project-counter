@@ -1,21 +1,24 @@
 // @flow 
 import * as React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../app/store";
+import {incrementCounterAC, resetCounterAC} from "../model/counter-reducer";
 import {Button} from "./Button";
 import {changeAndErrorType, counterValueType} from "./Counter";
 
 type DisplayAndControlBlockProps = {
     changeAndError: changeAndErrorType
     counterValue: counterValueType
-    incrementCount: () => void
-    counterReset: () => void
 };
-debugger
+
+
 export const DisplayAndControlBlock = ({
                                            changeAndError,
-                                           counterValue,
-                                           incrementCount,
-                                           counterReset,
                                        }: DisplayAndControlBlockProps) => {
+
+    const counterValue = useSelector<RootState, counterValueType>(state => state.counterValue)
+
+    const dispatch = useDispatch()
 
     let maxCounterStyle: boolean = false
     let resetButtonStyle: boolean = true
@@ -25,6 +28,16 @@ export const DisplayAndControlBlock = ({
     }
     if (counterValue.counter !== counterValue.startValue) {
         resetButtonStyle = false
+    }
+
+    const incrementCount = () => {
+        dispatch(incrementCounterAC({counter: counterValue.counter }))
+        // counterValue.counter += 1
+        // setCounterValue({...counterValue})
+
+    }
+    const resetCounter = () => {
+        dispatch(resetCounterAC({initialCounterValue: counterValue.startValue}))
     }
 
     return (
@@ -37,7 +50,7 @@ export const DisplayAndControlBlock = ({
             </div>
             <div className="button-wrapper">
                 <Button title={'inc'} onclick={incrementCount} className={'button'} disabled={maxCounterStyle}/>
-                <Button title={'reset'} onclick={counterReset} className={'button'} disabled={resetButtonStyle}/>
+                <Button title={'reset'} onclick={resetCounter} className={'button'} disabled={resetButtonStyle}/>
             </div>
         </div>
     );
