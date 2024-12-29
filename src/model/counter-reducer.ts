@@ -1,4 +1,4 @@
-import {counterValueType} from "../components/Counter";
+import {counterValueType} from "../components/DisplayAndControlBlock";
 
 const initialState: counterValueType = {
     counter: 0,

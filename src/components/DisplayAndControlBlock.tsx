@@ -4,19 +4,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../app/store";
 import {incrementCounterAC, resetCounterAC} from "../model/counter-reducer";
 import {Button} from "./Button";
-import {changeAndErrorType, counterValueType} from "./Counter";
+import {ChangeAndErrorType} from "./SettingBlock";
 
-type DisplayAndControlBlockProps = {
-    changeAndError: changeAndErrorType
-    counterValue: counterValueType
-};
+export type counterValueType = {
+    counter: number
+    startValue: number
+    maxValue: number
+}
 
-
-export const DisplayAndControlBlock = ({
-                                           changeAndError,
-                                       }: DisplayAndControlBlockProps) => {
+export const DisplayAndControlBlock = () => {
 
     const counterValue = useSelector<RootState, counterValueType>(state => state.counterValue)
+    const changeAndError = useSelector<RootState, ChangeAndErrorType>(state => state.changeAndError)
 
     const dispatch = useDispatch()
 
@@ -32,9 +31,6 @@ export const DisplayAndControlBlock = ({
 
     const incrementCount = () => {
         dispatch(incrementCounterAC({counter: counterValue.counter }))
-        // counterValue.counter += 1
-        // setCounterValue({...counterValue})
-
     }
     const resetCounter = () => {
         dispatch(resetCounterAC({initialCounterValue: counterValue.startValue}))
@@ -43,9 +39,9 @@ export const DisplayAndControlBlock = ({
     return (
         <div className={'wrapper'}>
             <div className='counter-wrapper'>
-                {changeAndError == '' &&  <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counterValue.counter}</span>}
-                {changeAndError == 'change' && <span className={'message-style'}>Enter values and press 'Set'</span>}
-                {changeAndError == 'error' && <span className={'message-error-style'}>Incorrect value!!!</span>}
+                {changeAndError.changeAndError == '' &&  <span className={maxCounterStyle ? 'max-count' : 'counter-style'}>{counterValue.counter}</span>}
+                {changeAndError.changeAndError == 'change' && <span className={'message-style'}>Enter values and press 'Set'</span>}
+                {changeAndError.changeAndError == 'error' && <span className={'message-error-style'}>Incorrect value!!!</span>}
 
             </div>
             <div className="button-wrapper">

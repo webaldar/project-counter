@@ -1,8 +1,10 @@
 import {combineReducers, legacy_createStore} from "redux";
+import {changeAndErrorReducer} from "../components/changeAndError-redeucer";
 import {counterReducer} from "../model/counter-reducer";
 
 const rootReucer = combineReducers({
-    counterValue: counterReducer
+    counterValue: counterReducer,
+    changeAndError: changeAndErrorReducer
 })
 
 export const store = legacy_createStore(rootReucer)

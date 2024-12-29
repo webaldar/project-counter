@@ -1,21 +1,22 @@
 import {ChangeEvent} from "react";
-import {changeAndErrorType} from "./Counter";
-import {counterSettingValueType} from "./SettingBlock";
-
-
+import {useDispatch} from "react-redux";
+import {setStatusAC} from "./changeAndError-redeucer";
 
 type InputProps = {
     value: number
     setValue: (value: number) => void
     type: string
     setButtonDisabled: (status: boolean) => void
-    setChangeAndError: (param: changeAndErrorType) => void
 };
 
-export const Input = ({value, setValue, type, setButtonDisabled, setChangeAndError }: InputProps) => {
+export const Input = ({value, setValue, type, setButtonDisabled }: InputProps) => {
+
+    // const changeAndError = useSelector<RootState, ChangeAndErrorType>(state => state.changeAndError)
+
+    const dispatch = useDispatch()
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setButtonDisabled(false)
-        setChangeAndError('change')
+        dispatch(setStatusAC({value: 'change'}))
         const valueForString = event.currentTarget.value
         setValue(JSON.parse(valueForString))
     }
